@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=3 uid="uid://60wrbc85nvj7"]
+
+[ext_resource type="Script" path="res://Game Manager.gd" id="1_r45vj"]
+[ext_resource type="Texture2D" uid="uid://dsn86bor4v1py" path="res://Dungeon Tiles/Full.png" id="2_44555"]
+[ext_resource type="Script" path="res://Player Controller.gd" id="3_ikjcb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wn6uv"]
+texture = ExtResource("2_44555")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+4:2/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+5:4/0 = 0
+5:5/0 = 0
+6:4/0 = 0
+6:3/0 = 0
+6:2/0 = 0
+6:1/0 = 0
+5:1/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+4:5/0 = 0
+4:4/0 = 0
+3:2/0 = 0
+3:3/0 = 0
+2:4/0 = 0
+2:5/0 = 0
+1:5/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+0:5/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+1:6/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+2:6/0 = 0
+5:6/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:6/0 = 0
+6:5/0 = 0
+3:5/0 = 0
+3:4/0 = 0
+6:7/0 = 0
+5:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lcwp4"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetAtlasSource_wn6uv")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f0du1"]
+width = 32
+height = 32
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_r45vj")
+grid_space = Rect2i(0, 0, 50, 50)
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_lcwp4")
+format = 2
+layer_0/name = "Ground"
+layer_1/name = "Wall"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 1)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+
+[node name="Player" type="Sprite2D" parent="."]
+texture = SubResource("NoiseTexture2D_f0du1")
+script = ExtResource("3_ikjcb")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
