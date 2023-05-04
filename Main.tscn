@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://60wrbc85nvj7"]
+[gd_scene load_steps=8 format=3 uid="uid://60wrbc85nvj7"]
 
 [ext_resource type="Script" path="res://Game Manager.gd" id="1_r45vj"]
 [ext_resource type="Texture2D" uid="uid://dsn86bor4v1py" path="res://Dungeon Tiles/Full.png" id="2_44555"]
 [ext_resource type="Script" path="res://Player Controller.gd" id="3_ikjcb"]
+[ext_resource type="Script" path="res://Time Controller.gd" id="4_7faou"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wn6uv"]
 texture = ExtResource("2_44555")
@@ -72,7 +73,7 @@ sources/1 = SubResource("TileSetAtlasSource_wn6uv")
 width = 32
 height = 32
 
-[node name="Node2D" type="Node2D"]
+[node name="GameManager" type="Node2D"]
 script = ExtResource("1_r45vj")
 grid_space = Rect2i(0, 0, 50, 50)
 
@@ -80,13 +81,20 @@ grid_space = Rect2i(0, 0, 50, 50)
 tile_set = SubResource("TileSet_lcwp4")
 format = 2
 layer_0/name = "Ground"
-layer_1/name = "Wall"
+layer_1/name = "Collision"
 layer_1/enabled = true
 layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Overlay"
+layer_2/enabled = true
+layer_2/modulate = Color(1, 1, 1, 1)
+layer_2/y_sort_enabled = false
+layer_2/y_sort_origin = 0
+layer_2/z_index = 5
+layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" type="Sprite2D" parent="."]
 texture = SubResource("NoiseTexture2D_f0du1")
@@ -94,3 +102,9 @@ script = ExtResource("3_ikjcb")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
+
+[node name="Enemy" type="Sprite2D" parent="."]
+script = ExtResource("4_7faou")
+
+[connection signal="new_movement_path_created" from="." to="Player" method="_on_game_manager_new_movement_path_created"]
+[connection signal="player_turn_start" from="." to="Player" method="_on_game_manager_player_turn_start"]
