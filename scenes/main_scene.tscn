@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://60wrbc85nvj7"]
+[gd_scene load_steps=11 format=3 uid="uid://60wrbc85nvj7"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_uvx4e"]
 [ext_resource type="Texture2D" uid="uid://dsn86bor4v1py" path="res://sprites/Full.png" id="2_36mmi"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_fnxes"]
 [ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="4_b1hhf"]
+[ext_resource type="PackedScene" uid="uid://c53fe3tbci2rr" path="res://components/health_component.tscn" id="5_abrx1"]
+[ext_resource type="PackedScene" uid="uid://b11smqmwg7lvc" path="res://components/hitbox_component.tscn" id="6_ffq0q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wn6uv"]
 texture = ExtResource("2_36mmi")
@@ -73,6 +75,10 @@ sources/1 = SubResource("TileSetAtlasSource_wn6uv")
 width = 32
 height = 32
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yco8v"]
+width = 32
+height = 32
+
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_uvx4e")
 grid_space = Rect2i(0, 0, 50, 50)
@@ -104,7 +110,13 @@ script = ExtResource("3_fnxes")
 zoom = Vector2(1.5, 1.5)
 
 [node name="Enemy" type="Sprite2D" parent="."]
-visible = false
+position = Vector2(144, 144)
+texture = SubResource("NoiseTexture2D_yco8v")
 script = ExtResource("4_b1hhf")
+speed = 10.0
+
+[node name="HealthComponent" parent="Enemy" instance=ExtResource("5_abrx1")]
+
+[node name="HitboxComponent" parent="Enemy" instance=ExtResource("6_ffq0q")]
 
 [connection signal="new_movement_path_created" from="." to="Player" method="_on_game_manager_new_movement_path_created"]

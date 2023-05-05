@@ -107,8 +107,8 @@ func generate_corridors(_start: Rect2i, _end: Rect2i):
 	
 	var path: Array[Vector2i] = astar_grid.get_id_path(start, end)
 	
-	for id in path:
-		tile_map.set_cell(Layer.GROUND, id, 1, Vector2i(1, 2))
+	for coords in path:
+		tile_map.set_cell(Layer.GROUND, coords, 1, Vector2i(1, 2))
 
 	
 var lastCellPosition: Vector2i
