@@ -1,7 +1,10 @@
 extends PanelContainer
+class_name Icon
 
 @onready var texture_rect = $MarginContainer/TextureRect
 
-func set_icon_texture(_texture) -> void:
-	if texture_rect:
-		texture_rect.texture = _texture
+@export var sprite: TimeComponent
+
+func set_component(_sprite: TimeComponent) -> void:
+	sprite = _sprite
+	texture_rect.texture = _sprite.texture

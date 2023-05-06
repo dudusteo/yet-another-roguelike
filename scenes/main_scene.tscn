@@ -3,8 +3,10 @@
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_uvx4e"]
 [ext_resource type="Texture2D" uid="uid://cij5y5v5ij4ri" path="res://sprites/tiles.png" id="2_dpvfv"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_fnxes"]
+[ext_resource type="Texture2D" uid="uid://bhgrw32ph40xh" path="res://sprites/Owlet_Monster.png" id="3_ib0dj"]
 [ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="4_b1hhf"]
 [ext_resource type="PackedScene" uid="uid://c53fe3tbci2rr" path="res://components/health_component.tscn" id="5_abrx1"]
+[ext_resource type="Texture2D" uid="uid://bbnumea8fjb4d" path="res://sprites/Pink_Monster.png" id="5_vacma"]
 [ext_resource type="PackedScene" uid="uid://b11smqmwg7lvc" path="res://components/hitbox_component.tscn" id="6_ffq0q"]
 [ext_resource type="Script" path="res://ui/scripts/speed_bar.gd" id="7_hw0fs"]
 
@@ -18,14 +20,6 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_lcwp4"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_hv8ex")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f0du1"]
-width = 32
-height = 32
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yco8v"]
-width = 32
-height = 32
 
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_uvx4e")
@@ -51,17 +45,17 @@ layer_2/z_index = 5
 layer_2/tile_data = PackedInt32Array()
 
 [node name="Player" type="Sprite2D" parent="."]
-texture = SubResource("NoiseTexture2D_f0du1")
+texture = ExtResource("3_ib0dj")
 script = ExtResource("3_fnxes")
+speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
 
 [node name="Enemy" type="Sprite2D" parent="."]
 position = Vector2(144, 144)
-texture = SubResource("NoiseTexture2D_yco8v")
+texture = ExtResource("5_vacma")
 script = ExtResource("4_b1hhf")
-speed = 50.0
 
 [node name="HealthComponent" parent="Enemy" instance=ExtResource("5_abrx1")]
 
@@ -77,14 +71,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpeedBar" type="Control" parent="UI/Control"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="SpeedBar" type="Control" parent="UI/Control/MarginContainer"]
+layout_mode = 2
 script = ExtResource("7_hw0fs")
 
-[node name="Line" type="MarginContainer" parent="UI/Control/SpeedBar"]
+[node name="Line" type="MarginContainer" parent="UI/Control/MarginContainer/SpeedBar"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -95,7 +98,7 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 16
 
-[node name="LineFill" type="Panel" parent="UI/Control/SpeedBar/Line"]
+[node name="LineFill" type="Panel" parent="UI/Control/MarginContainer/SpeedBar/Line"]
 layout_mode = 2
 
 [connection signal="new_movement_path_created" from="." to="Player" method="_on_game_manager_new_movement_path_created"]

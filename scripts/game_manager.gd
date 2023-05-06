@@ -43,13 +43,8 @@ func _ready():
 			self.connect("entity_turn_start", child._on_turn_start)
 			speed_bars.append(SpeedData.new(child, child.speed))
 			emit_signal("entity_enter", child)
-	
-
 
 func _process(_delta):
-	
-	
-	
 	for entity in speed_bars:
 		if not time_stop:
 			entity.current_speed += entity.data.speed * _delta * game_speed

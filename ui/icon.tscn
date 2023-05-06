@@ -1,23 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7ugfcjobry3m"]
+[gd_scene load_steps=2 format=3 uid="uid://b7ugfcjobry3m"]
 
-[ext_resource type="Texture2D" uid="uid://beglidykoxp5m" path="res://icon.svg" id="1_8jqyq"]
 [ext_resource type="Script" path="res://ui/icon.gd" id="1_oip7a"]
 
 [node name="Icon" type="PanelContainer"]
 custom_minimum_size = Vector2(32, 32)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 32.0
+offset_bottom = 32.0
 script = ExtResource("1_oip7a")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_8jqyq")
 expand_mode = 1
 stretch_mode = 5
