@@ -1,10 +1,13 @@
 extends "res://scripts/time_controller.gd"
 
+@onready var tile_manager: Node2D = get_tree().get_root().get_node("Root/TileManager")
+
 var path: PackedVector2Array
 var current_target: Vector2
 var currentPathIndex: int = 0
 
 func _ready() -> void:
+	tile_manager.connect("new_movement_path_created", self._on_tile_manager_new_movement_path_created)
 	super()
 	current_target = position
 	
@@ -20,6 +23,6 @@ func _process(_delta) -> void:
 			end_turn()
 
 
-func _on_game_manager_new_movement_path_created(_path: PackedVector2Array) -> void:
+func _on_tile_manager_new_movement_path_created(_path: PackedVector2Array) -> void:
 	currentPathIndex = 0;
 	path = _path

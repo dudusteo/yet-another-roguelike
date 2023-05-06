@@ -1,14 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://60wrbc85nvj7"]
+[gd_scene load_steps=11 format=3 uid="uid://60wrbc85nvj7"]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_uvx4e"]
 [ext_resource type="Texture2D" uid="uid://cij5y5v5ij4ri" path="res://sprites/tiles.png" id="2_dpvfv"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_fnxes"]
 [ext_resource type="Texture2D" uid="uid://bhgrw32ph40xh" path="res://sprites/Owlet_Monster.png" id="3_ib0dj"]
+[ext_resource type="Script" path="res://scripts/tile_manager.gd" id="3_w55vt"]
 [ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="4_b1hhf"]
-[ext_resource type="PackedScene" uid="uid://c53fe3tbci2rr" path="res://components/health_component.tscn" id="5_abrx1"]
 [ext_resource type="Texture2D" uid="uid://bbnumea8fjb4d" path="res://sprites/Pink_Monster.png" id="5_vacma"]
-[ext_resource type="PackedScene" uid="uid://b11smqmwg7lvc" path="res://components/hitbox_component.tscn" id="6_ffq0q"]
 [ext_resource type="Script" path="res://ui/speed_bar.gd" id="9_gnjlk"]
+[ext_resource type="Script" path="res://scripts/time_manager.gd" id="10_075q7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hv8ex"]
 texture = ExtResource("2_dpvfv")
@@ -21,11 +20,9 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_hv8ex")
 
-[node name="GameManager" type="Node2D"]
-script = ExtResource("1_uvx4e")
-grid_space = Rect2i(0, 0, 50, 50)
+[node name="Root" type="Node"]
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileManager" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_lcwp4")
 format = 2
 layer_0/name = "Ground"
@@ -43,6 +40,8 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 5
 layer_2/tile_data = PackedInt32Array()
+script = ExtResource("3_w55vt")
+grid_space = Rect2i(0, 0, 50, 50)
 
 [node name="Player" type="Sprite2D" parent="."]
 texture = ExtResource("3_ib0dj")
@@ -56,11 +55,6 @@ zoom = Vector2(1.5, 1.5)
 position = Vector2(144, 144)
 texture = ExtResource("5_vacma")
 script = ExtResource("4_b1hhf")
-
-[node name="HealthComponent" parent="Enemy" instance=ExtResource("5_abrx1")]
-MAX_HEALTH = 10.0
-
-[node name="HitboxComponent" parent="Enemy" instance=ExtResource("6_ffq0q")]
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -102,4 +96,5 @@ theme_override_constants/margin_bottom = 16
 [node name="LineFill" type="Panel" parent="UI/Control/MarginContainer/SpeedBar/Line"]
 layout_mode = 2
 
-[connection signal="new_movement_path_created" from="." to="Player" method="_on_game_manager_new_movement_path_created"]
+[node name="TimeManager" type="Node2D" parent="."]
+script = ExtResource("10_075q7")

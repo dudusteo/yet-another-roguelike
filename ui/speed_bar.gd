@@ -3,15 +3,15 @@ extends Control
 const Icon = preload("res://ui/icon.tscn")
 
 @onready var line: Panel = $Line/LineFill
-@onready var game_manager: Node2D = get_tree().get_root().get_node("GameManager")
+@onready var time_manager: Node2D = get_tree().get_root().get_node("Root/TimeManager")
 
 var max_speed_bar: float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	game_manager.connect("entity_enter", self.create_bar_icon)
-	game_manager.connect("entity_speed_changed", self.update_bar_position)
-	max_speed_bar = game_manager.max_speed_bar
+	time_manager.connect("entity_enter", self.create_bar_icon)
+	time_manager.connect("entity_speed_changed", self.update_bar_position)
+	max_speed_bar = time_manager.max_speed_bar
 
 func create_bar_icon(_entity: Sprite2D) -> void:
 	var icon = Icon.instantiate()
