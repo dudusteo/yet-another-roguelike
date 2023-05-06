@@ -8,15 +8,15 @@ var time_stop: bool = true
 @onready var game_manager: Node2D = get_tree().get_root().get_node("GameManager")
 
 
-func _ready():
+func _ready() -> void:
 	self.connect("turn_end", game_manager._on_turn_end)
 
 
-func end_turn():
+func end_turn() -> void:
 	time_stop = true
 	emit_signal("turn_end", self)
 
-func _on_turn_start(_entity: Sprite2D):
+func _on_turn_start(_entity: Sprite2D) -> void:
 	if self == _entity:
 		print(self, "time_turn_start")
 		time_stop = false

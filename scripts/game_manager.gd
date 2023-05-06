@@ -34,7 +34,7 @@ class SpeedData:
 
 var speed_bars: Array[SpeedData] = []
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	build_level()
 	used_collision_cells = tile_map.get_used_cells(Layer.COLLISION)
@@ -44,7 +44,7 @@ func _ready():
 			speed_bars.append(SpeedData.new(child, child.speed))
 			emit_signal("entity_enter", child)
 
-func _process(_delta):
+func _process(_delta) -> void:
 	for entity in speed_bars:
 		if not time_stop:
 			entity.current_speed += entity.data.speed * _delta * game_speed
@@ -54,7 +54,7 @@ func _process(_delta):
 				time_stop = true
 				emit_signal("entity_turn_start", entity.data) 
 
-func build_level():
+func build_level() -> void:
 	rooms.clear()
 	split_space(grid_space, 3)
 	
@@ -65,7 +65,7 @@ func build_level():
 			prevRoom = room
 	generate_walls(tile_map)
 
-func split_space(_space: Rect2i, _iterations: int):
+func split_space(_space: Rect2i, _iterations: int) -> void:
 	if _iterations == 0:
 		generate_room(_space)
 		return
@@ -87,13 +87,13 @@ func split_space(_space: Rect2i, _iterations: int):
 	split_space(leftSpace, _iterations - 1)
 	split_space(rightSpace, _iterations - 1)
 	
-func generate_room(_space: Rect2i):
+func generate_room(_space: Rect2i) -> void:
 	rooms.append(_space)
 	for x in range(_space.size.x - 2):
 		for y in range(_space.size.y - 2):
 			tile_map.set_cell(Layer.GROUND, Vector2i(x + 1, y + 1) + _space.position, Tileset.TILES, FLOOR)
 	
-func generate_walls(_tile_map: TileMap):
+func generate_walls(_tile_map: TileMap) -> void:
 	var tiles: Array[Vector2i] = _tile_map.get_used_cells(Layer.GROUND)
 	for tile in tiles:
 		var neighbors: Array[Vector2i] = _tile_map.get_surrounding_cells(tile)
@@ -101,7 +101,7 @@ func generate_walls(_tile_map: TileMap):
 			if !_tile_map.get_cell_tile_data(0, neighbor):
 				_tile_map.set_cell(Layer.COLLISION, neighbor, Tileset.TILES, WALL)
 	
-func generate_corridors(_start: Rect2i, _end: Rect2i):
+func generate_corridors(_start: Rect2i, _end: Rect2i) -> void:
 	var start: Vector2i = Vector2i(_start.position.x + _start.size.x / 2, _start.position.y + _start.size.y / 2)
 	var end: Vector2i = Vector2i(_end.position.x + _end.size.x / 2, _end.position.y + _end.size.y / 2)
 	
@@ -118,7 +118,7 @@ func generate_corridors(_start: Rect2i, _end: Rect2i):
 	
 var lastCellPosition: Vector2i
 
-func _input(_event):
+func _input(_event) -> void:
 	if _event is InputEventScreenTouch and _event.pressed:
 		var mouseWorldPosition: Vector2 = get_global_mouse_position()
 		var cellPosition: Vector2i = tile_map.local_to_map(mouseWorldPosition)
@@ -147,7 +147,7 @@ func _input(_event):
 						tile_map.set_cell(Layer.OVERLAY, cell_pos, Tileset.TILES, Vector2i(0, 1))
 				lastCellPosition = cellPosition
 
-func _on_turn_end(_entity):
+func _on_turn_end(_entity) -> void:
 	for entity in speed_bars:
 		if entity.data == _entity:
 			print(_entity, "turn end")

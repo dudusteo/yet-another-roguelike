@@ -2,7 +2,7 @@ extends Control
 
 const Icon = preload("res://ui/icon.tscn")
 
-@onready var line = $Line/LineFill
+@onready var line: Panel = $Line/LineFill
 @onready var game_manager: Node2D = get_tree().get_root().get_node("GameManager")
 
 var max_speed_bar: float
@@ -16,9 +16,9 @@ func _ready() -> void:
 func create_bar_icon(_entity: Sprite2D) -> void:
 	var icon = Icon.instantiate()
 	var line_rect: Rect2 = line.get_rect()
-	var ratio = _entity.speed / max_speed_bar
-	var x_pos = line_rect.position.x + line_rect.size.x / 2
-	var y_pos = line_rect.position.y + line_rect.size.y * ratio
+	var ratio: float = _entity.speed / max_speed_bar
+	var x_pos: float = line_rect.position.x + line_rect.size.x / 2
+	var y_pos: float = line_rect.position.y + line_rect.size.y * ratio
 	icon.set_position(Vector2(x_pos, y_pos) - icon.size / 2)
 	add_child(icon)
 	icon.set_component(_entity)
@@ -27,7 +27,7 @@ func update_bar_position(_entity: Sprite2D, _current_speed: float) -> void:
 	for child in get_children():
 		if child is Icon and child.sprite == _entity:
 			var line_rect: Rect2 = line.get_rect()
-			var ratio = _current_speed / max_speed_bar
-			var x_pos = line_rect.position.x + line_rect.size.x / 2
-			var y_pos = line_rect.position.y + line_rect.size.y * ratio
+			var ratio: float = _current_speed / max_speed_bar
+			var x_pos: float = line_rect.position.x + line_rect.size.x / 2
+			var y_pos: float = line_rect.position.y + line_rect.size.y * ratio
 			child.set_position(Vector2(x_pos, y_pos) - child.size / 2)

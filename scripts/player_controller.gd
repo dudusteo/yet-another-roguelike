@@ -4,11 +4,11 @@ var path: PackedVector2Array
 var current_target: Vector2
 var currentPathIndex: int = 0
 
-func _ready():
+func _ready() -> void:
 	super()
 	current_target = position
 	
-func _process(_delta):
+func _process(_delta) -> void:
 	if position == current_target && not time_stop:
 		currentPathIndex += 1
 		if (currentPathIndex >= path.size()):
@@ -20,6 +20,6 @@ func _process(_delta):
 			end_turn()
 
 
-func _on_game_manager_new_movement_path_created(_path: PackedVector2Array):
+func _on_game_manager_new_movement_path_created(_path: PackedVector2Array) -> void:
 	currentPathIndex = 0;
 	path = _path

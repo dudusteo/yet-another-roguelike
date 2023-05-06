@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c53fe3tbci2rr" path="res://components/health_component.tscn" id="5_abrx1"]
 [ext_resource type="Texture2D" uid="uid://bbnumea8fjb4d" path="res://sprites/Pink_Monster.png" id="5_vacma"]
 [ext_resource type="PackedScene" uid="uid://b11smqmwg7lvc" path="res://components/hitbox_component.tscn" id="6_ffq0q"]
-[ext_resource type="Script" path="res://ui/scripts/speed_bar.gd" id="7_hw0fs"]
+[ext_resource type="Script" path="res://ui/speed_bar.gd" id="9_gnjlk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hv8ex"]
 texture = ExtResource("2_dpvfv")
@@ -58,6 +58,7 @@ texture = ExtResource("5_vacma")
 script = ExtResource("4_b1hhf")
 
 [node name="HealthComponent" parent="Enemy" instance=ExtResource("5_abrx1")]
+MAX_HEALTH = 10.0
 
 [node name="HitboxComponent" parent="Enemy" instance=ExtResource("6_ffq0q")]
 
@@ -85,7 +86,7 @@ theme_override_constants/margin_bottom = 24
 
 [node name="SpeedBar" type="Control" parent="UI/Control/MarginContainer"]
 layout_mode = 2
-script = ExtResource("7_hw0fs")
+script = ExtResource("9_gnjlk")
 
 [node name="Line" type="MarginContainer" parent="UI/Control/MarginContainer/SpeedBar"]
 layout_mode = 1

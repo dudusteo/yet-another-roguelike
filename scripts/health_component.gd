@@ -6,11 +6,11 @@ class_name HealthComponent
 var health: float
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready() -> void:
 	health = MAX_HEALTH # Replace with function body.
 
 
-func damage(attack: Attack):
+func damage(attack: Attack) -> void:
 	health -= attack.attack_damage
 
 	if health <= 0:
