@@ -1,4 +1,5 @@
 extends Sprite2D
+class_name TimeComponent
 
 signal turn_end()
 

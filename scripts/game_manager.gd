@@ -1,14 +1,20 @@
 extends Node2D
 
 signal new_movement_path_created(path)
-signal turn_start(entity)
+
+signal entity_turn_start(entity)
+signal entity_enter(entity)
+signal entity_speed_changed(entity, current_speed)
 
 @export var grid_space: Rect2i
 
 @onready var tile_map: TileMap = $TileMap
 @onready var player: Sprite2D = $Player
 
+enum Tileset {TILES}
 enum Layer {GROUND, COLLISION, OVERLAY}
+const WALL: Vector2i = Vector2i(0, 0)
+const FLOOR: Vector2i = Vector2i(1, 1)
 
 var rooms: Array[Rect2i] = []
 var astar_grid: AStarGrid2D = AStarGrid2D.new()
@@ -24,7 +30,7 @@ class SpeedData:
 		
 
 @export var game_speed: float = 10
-@export var speed_bar: float = 100
+@export var max_speed_bar: float = 100
 
 var speed_bars: Array[SpeedData] = []
 
@@ -33,21 +39,25 @@ func _ready():
 	build_level()
 	used_collision_cells = tile_map.get_used_cells(Layer.COLLISION)
 	for child in get_children():
-		if child is Sprite2D and child.speed:
-			self.connect("turn_start", child._on_turn_start)
+		if child is TimeComponent:
+			self.connect("entity_turn_start", child._on_turn_start)
 			speed_bars.append(SpeedData.new(child, child.speed))
+			emit_signal("entity_enter", child)
 	
 
 
 func _process(_delta):
+	
+	
+	
 	for entity in speed_bars:
 		if not time_stop:
-			print(entity.data, entity.current_speed)
 			entity.current_speed += entity.data.speed * _delta * game_speed
-			entity.current_speed = min(entity.current_speed, speed_bar)
-			if entity.current_speed == speed_bar:
+			entity.current_speed = min(entity.current_speed, max_speed_bar)
+			emit_signal("entity_speed_changed", entity.data, entity.current_speed)
+			if entity.current_speed == max_speed_bar:
 				time_stop = true
-				emit_signal("turn_start", entity.data) 
+				emit_signal("entity_turn_start", entity.data) 
 
 func build_level():
 	rooms.clear()
@@ -86,7 +96,7 @@ func generate_room(_space: Rect2i):
 	rooms.append(_space)
 	for x in range(_space.size.x - 2):
 		for y in range(_space.size.y - 2):
-			tile_map.set_cell(Layer.GROUND, Vector2i(x + 1, y + 1) + _space.position, 1, Vector2i(1, 2))
+			tile_map.set_cell(Layer.GROUND, Vector2i(x + 1, y + 1) + _space.position, Tileset.TILES, FLOOR)
 	
 func generate_walls(_tile_map: TileMap):
 	var tiles: Array[Vector2i] = _tile_map.get_used_cells(Layer.GROUND)
@@ -94,7 +104,7 @@ func generate_walls(_tile_map: TileMap):
 		var neighbors: Array[Vector2i] = _tile_map.get_surrounding_cells(tile)
 		for neighbor in neighbors:
 			if !_tile_map.get_cell_tile_data(0, neighbor):
-				_tile_map.set_cell(Layer.COLLISION, neighbor, 1, Vector2i(1, 1))
+				_tile_map.set_cell(Layer.COLLISION, neighbor, Tileset.TILES, WALL)
 	
 func generate_corridors(_start: Rect2i, _end: Rect2i):
 	var start: Vector2i = Vector2i(_start.position.x + _start.size.x / 2, _start.position.y + _start.size.y / 2)
@@ -108,7 +118,7 @@ func generate_corridors(_start: Rect2i, _end: Rect2i):
 	var path: Array[Vector2i] = astar_grid.get_id_path(start, end)
 	
 	for coords in path:
-		tile_map.set_cell(Layer.GROUND, coords, 1, Vector2i(1, 2))
+		tile_map.set_cell(Layer.GROUND, coords, Tileset.TILES, FLOOR)
 
 	
 var lastCellPosition: Vector2i
@@ -139,10 +149,9 @@ func _input(_event):
 				for cell_pos in path:
 					if cell_pos != path[0]:
 						cell_pos = tile_map.local_to_map(cell_pos)
-						tile_map.set_cell(Layer.OVERLAY, cell_pos, 1, Vector2i(4, 5))
+						tile_map.set_cell(Layer.OVERLAY, cell_pos, Tileset.TILES, Vector2i(0, 1))
 				lastCellPosition = cellPosition
 
-#add object origin to reset its time
 func _on_turn_end(_entity):
 	for entity in speed_bars:
 		if entity.data == _entity:
