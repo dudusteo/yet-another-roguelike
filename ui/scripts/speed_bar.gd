@@ -19,7 +19,6 @@ func create_bar_icon(_entity: Sprite2D) -> void:
 	var ratio = _entity.speed / max_speed_bar
 	var x_pos = line_rect.position.x + line_rect.size.x / 2
 	var y_pos = line_rect.position.y + line_rect.size.y * ratio
-	print(icon.size)
 	icon.set_position(Vector2(x_pos, y_pos) - icon.size / 2)
 	add_child(icon)
 	icon.set_component(_entity)
