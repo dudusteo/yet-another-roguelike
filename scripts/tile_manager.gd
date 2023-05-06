@@ -81,7 +81,6 @@ func generate_corridors(_start: Rect2i, _end: Rect2i) -> void:
 	for coords in path:
 		set_cell(Layer.GROUND, coords, Tileset.TILES, FLOOR)
 
-	
 var lastCellPosition: Vector2i
 
 func _input(_event) -> void:

@@ -1,4 +1,4 @@
-extends "res://scripts/time_controller.gd"
+extends "res://scripts/entity_controller.gd"
 
 @onready var tile_manager: Node2D = get_tree().get_root().get_node("Root/TileManager")
 

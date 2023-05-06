@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://scripts/tile_manager.gd" id="3_w55vt"]
 [ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="4_b1hhf"]
 [ext_resource type="Texture2D" uid="uid://bbnumea8fjb4d" path="res://sprites/Pink_Monster.png" id="5_vacma"]
-[ext_resource type="Script" path="res://ui/speed_bar.gd" id="9_gnjlk"]
+[ext_resource type="PackedScene" uid="uid://dp8vsuibuisk7" path="res://ui/ui.tscn" id="7_fg2c4"]
 [ext_resource type="Script" path="res://scripts/time_manager.gd" id="10_075q7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hv8ex"]
@@ -56,45 +56,9 @@ position = Vector2(144, 144)
 texture = ExtResource("5_vacma")
 script = ExtResource("4_b1hhf")
 
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Control" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
-
-[node name="SpeedBar" type="Control" parent="UI/Control/MarginContainer"]
-layout_mode = 2
-script = ExtResource("9_gnjlk")
-
-[node name="Line" type="MarginContainer" parent="UI/Control/MarginContainer/SpeedBar"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 32.0
-grow_vertical = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 16
-
-[node name="LineFill" type="Panel" parent="UI/Control/MarginContainer/SpeedBar/Line"]
-layout_mode = 2
+[node name="UI" parent="." instance=ExtResource("7_fg2c4")]
 
 [node name="TimeManager" type="Node2D" parent="."]
 script = ExtResource("10_075q7")
+game_speed = null
+max_speed_bar = null

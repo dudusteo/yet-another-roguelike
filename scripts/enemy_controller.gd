@@ -1,4 +1,4 @@
-extends "res://scripts/time_controller.gd"
+extends "res://scripts/entity_controller.gd"
 
 var current_target: Vector2
 

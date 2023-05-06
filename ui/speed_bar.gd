@@ -1,6 +1,6 @@
 extends Control
 
-const Icon = preload("res://ui/icon.tscn")
+const Icon = preload("res://ui/icon/icon.tscn")
 
 @onready var line: Panel = $Line/LineFill
 @onready var time_manager: Node2D = get_tree().get_root().get_node("Root/TimeManager")

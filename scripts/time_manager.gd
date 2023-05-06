@@ -21,7 +21,7 @@ var speed_bars: Array[SpeedData] = []
 
 func _ready() -> void:
 	for child in get_tree().get_root().get_node("Root").get_children():
-		if child is TimeComponent:
+		if child is Entity:
 			self.connect("entity_turn_start", child._on_turn_start)
 			speed_bars.append(SpeedData.new(child, child.speed))
 			emit_signal("entity_enter", child)
