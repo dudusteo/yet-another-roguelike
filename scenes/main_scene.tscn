@@ -32,7 +32,7 @@ texture = ExtResource("7_s5h37")
 
 [sub_resource type="Resource" id="Resource_jla61"]
 script = ExtResource("6_8dlua")
-item_datas = [SubResource("Resource_wuwnh")]
+item_datas = [SubResource("Resource_wuwnh"), null, null, null, null, null]
 
 [node name="Root" type="Node"]
 script = ExtResource("1_hll4a")

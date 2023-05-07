@@ -1,6 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdf4gub1vn4uw"]
+[gd_scene load_steps=2 format=3 uid="uid://cdf4gub1vn4uw"]
 
-[ext_resource type="Texture2D" uid="uid://beglidykoxp5m" path="res://icon.svg" id="1_bws1h"]
 [ext_resource type="Script" path="res://ui/slot.gd" id="1_siuue"]
 
 [node name="Slot" type="PanelContainer"]
@@ -16,7 +15,6 @@ theme_override_constants/margin_bottom = 8
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("1_bws1h")
 expand_mode = 1
 stretch_mode = 4
 
