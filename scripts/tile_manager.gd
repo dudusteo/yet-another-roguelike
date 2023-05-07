@@ -83,8 +83,8 @@ func generate_corridors(_start: Rect2i, _end: Rect2i) -> void:
 
 var lastCellPosition: Vector2i
 
-func _input(_event) -> void:
-	if _event is InputEventScreenTouch and _event.pressed:
+func _unhandled_input(_event: InputEvent) -> void:
+	if _event is InputEventMouseButton and _event.pressed:
 		var mouseWorldPosition: Vector2 = get_global_mouse_position()
 		var cellPosition: Vector2i = local_to_map(mouseWorldPosition)
 		

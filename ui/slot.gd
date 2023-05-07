@@ -1,13 +1,12 @@
 extends PanelContainer
 
-signal slot_clicked(index: int)
+signal _slot_clicked(index: int)
 
 @onready var texture_rect = $MarginContainer/TextureRect
 
-func set_slot_data(item_data: ItemData) -> void:
-	texture_rect.texture = item_data.texture
+func set_slot_data(_item_data: ItemData) -> void:
+	texture_rect.texture = _item_data.texture
 
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventScreenTouch and event.is_pressed():
-		print(get_index())
-		emit_signal("slot_clicked", get_index())
+func _on_gui_input(_event: InputEvent) -> void:
+	if _event is InputEventMouseButton and _event.pressed:
+		emit_signal("_slot_clicked", get_index())
