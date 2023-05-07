@@ -14,7 +14,7 @@ class SpeedData:
 		self.current_speed = _current_speed
 		
 
-@export var game_speed: float = 10
+@export var game_speed: float = 50
 @export var max_speed_bar: float = 100
 
 var speed_bars: Array[SpeedData] = []

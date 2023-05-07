@@ -1,8 +1,8 @@
-extends Control
+extends MarginContainer
 
 const Icon = preload("res://ui/icon/icon.tscn")
 
-@onready var line: Panel = $Line/LineFill
+@onready var line: Panel = $LineFill
 @onready var time_manager: Node2D = get_tree().get_root().get_node("Root/TimeManager")
 
 var max_speed_bar: float

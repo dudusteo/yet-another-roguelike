@@ -7,7 +7,7 @@ signal new_movement_path_created(path)
 @onready var player: Sprite2D = get_tree().get_root().get_node("Root/Player")
 
 enum Tileset {TILES}
-enum Layer {GROUND, COLLISION, OVERLAY}
+enum Layer {GROUND, COLLISION, OVERLAY, INTERACTABLE}
 const WALL: Vector2i = Vector2i(0, 0)
 const FLOOR: Vector2i = Vector2i(1, 1)
 
@@ -106,8 +106,5 @@ func _input(_event) -> void:
 				emit_signal("new_movement_path_created", path)
 			else:
 				clear_layer(Layer.OVERLAY)
-				for cell_pos in path:
-					if cell_pos != path[0]:
-						cell_pos = local_to_map(cell_pos)
-						set_cell(Layer.OVERLAY, cell_pos, Tileset.TILES, Vector2i(0, 1))
+				set_cell(Layer.OVERLAY, cellPosition, Tileset.TILES, Vector2i(0, 1))
 				lastCellPosition = cellPosition

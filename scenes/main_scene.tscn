@@ -1,12 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://60wrbc85nvj7"]
+[gd_scene load_steps=17 format=3 uid="uid://60wrbc85nvj7"]
 
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_hll4a"]
 [ext_resource type="Texture2D" uid="uid://cij5y5v5ij4ri" path="res://sprites/tiles.png" id="2_dpvfv"]
 [ext_resource type="Script" path="res://scripts/player_controller.gd" id="3_fnxes"]
 [ext_resource type="Texture2D" uid="uid://bhgrw32ph40xh" path="res://sprites/Owlet_Monster.png" id="3_ib0dj"]
 [ext_resource type="Script" path="res://scripts/tile_manager.gd" id="3_w55vt"]
 [ext_resource type="Script" path="res://scripts/enemy_controller.gd" id="4_b1hhf"]
 [ext_resource type="Texture2D" uid="uid://bbnumea8fjb4d" path="res://sprites/Pink_Monster.png" id="5_vacma"]
+[ext_resource type="Script" path="res://inventory/inventory_data.gd" id="6_8dlua"]
+[ext_resource type="Script" path="res://inventory/item_data.gd" id="6_dk067"]
 [ext_resource type="PackedScene" uid="uid://dp8vsuibuisk7" path="res://ui/ui.tscn" id="7_fg2c4"]
+[ext_resource type="Texture2D" uid="uid://bah7iqwd7dheg" path="res://sprites/48-Expresso.png" id="7_s5h37"]
 [ext_resource type="Script" path="res://scripts/time_manager.gd" id="10_075q7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rri67"]
@@ -20,7 +24,18 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_rri67")
 
+[sub_resource type="Resource" id="Resource_wuwnh"]
+script = ExtResource("6_dk067")
+name = "Coffee"
+description = "Coffee"
+texture = ExtResource("7_s5h37")
+
+[sub_resource type="Resource" id="Resource_jla61"]
+script = ExtResource("6_8dlua")
+item_datas = [SubResource("Resource_wuwnh")]
+
 [node name="Root" type="Node"]
+script = ExtResource("1_hll4a")
 
 [node name="TileManager" type="TileMap" parent="."]
 texture_filter = 1
@@ -41,6 +56,13 @@ layer_2/y_sort_enabled = false
 layer_2/y_sort_origin = 0
 layer_2/z_index = 5
 layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Interactable"
+layer_3/enabled = true
+layer_3/modulate = Color(1, 1, 1, 1)
+layer_3/y_sort_enabled = false
+layer_3/y_sort_origin = 0
+layer_3/z_index = 2
+layer_3/tile_data = PackedInt32Array()
 script = ExtResource("3_w55vt")
 grid_space = Rect2i(0, 0, 50, 50)
 
@@ -48,6 +70,7 @@ grid_space = Rect2i(0, 0, 50, 50)
 texture_filter = 1
 texture = ExtResource("3_ib0dj")
 script = ExtResource("3_fnxes")
+inventory_data = SubResource("Resource_jla61")
 speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -63,5 +86,3 @@ script = ExtResource("4_b1hhf")
 
 [node name="TimeManager" type="Node2D" parent="."]
 script = ExtResource("10_075q7")
-game_speed = null
-max_speed_bar = null

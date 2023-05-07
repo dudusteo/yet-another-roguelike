@@ -2,6 +2,7 @@ extends Sprite2D
 class_name Entity
 
 signal turn_end()
+signal is_tile_open()
 
 @export var speed: float = 5
 var time_stop: bool = true

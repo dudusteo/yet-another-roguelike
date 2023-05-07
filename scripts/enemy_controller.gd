@@ -11,7 +11,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta) -> void:
-	if not time_stop:
+	if position == current_target and not time_stop:
 		var direction: int = randi() % 5
 		if direction == 1:
 			current_target += Vector2(-32, 0)
@@ -21,5 +21,7 @@ func _process(_delta) -> void:
 			current_target += Vector2(32, 0)
 		elif direction == 4:
 			current_target += Vector2(0, -32)
-		end_turn()
-	position = position.move_toward(current_target, _delta * 200)
+	if not time_stop:
+		position = position.move_toward(current_target, _delta * 200)
+		if position == current_target:
+			end_turn()

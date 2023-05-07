@@ -1,4 +1,4 @@
 extends Resource
-class_name InvetoryData
+class_name InventoryData
 
-@export var slot_datas: Array[ItemData]
+@export var item_datas: Array[ItemData]

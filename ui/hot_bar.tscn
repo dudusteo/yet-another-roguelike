@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://jn4qsa0g5pjm"]
+[gd_scene load_steps=2 format=3 uid="uid://jn4qsa0g5pjm"]
 
 [ext_resource type="Script" path="res://ui/hot_bar.gd" id="1_apqcr"]
-[ext_resource type="PackedScene" uid="uid://cdf4gub1vn4uw" path="res://ui/slot.tscn" id="1_ldcwk"]
 
 [node name="HotBar" type="PanelContainer"]
 script = ExtResource("1_apqcr")
@@ -10,10 +9,4 @@ script = ExtResource("1_apqcr")
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="Slot" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_ldcwk")]
-layout_mode = 2
-
-[node name="Slot2" parent="MarginContainer/HBoxContainer" instance=ExtResource("1_ldcwk")]
 layout_mode = 2
