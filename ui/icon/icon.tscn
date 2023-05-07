@@ -12,6 +12,7 @@ script = ExtResource("1_8m72k")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+texture_filter = 1
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 5

@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdf4gub1vn4uw"]
+
+[ext_resource type="Texture2D" uid="uid://beglidykoxp5m" path="res://icon.svg" id="1_bws1h"]
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(32, 32)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("1_bws1h")
+expand_mode = 1
+stretch_mode = 4

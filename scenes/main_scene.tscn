@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dp8vsuibuisk7" path="res://ui/ui.tscn" id="7_fg2c4"]
 [ext_resource type="Script" path="res://scripts/time_manager.gd" id="10_075q7"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hv8ex"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rri67"]
 texture = ExtResource("2_dpvfv")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
@@ -18,11 +18,12 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_lcwp4"]
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_hv8ex")
+sources/0 = SubResource("TileSetAtlasSource_rri67")
 
 [node name="Root" type="Node"]
 
 [node name="TileManager" type="TileMap" parent="."]
+texture_filter = 1
 tile_set = SubResource("TileSet_lcwp4")
 format = 2
 layer_0/name = "Ground"
@@ -44,14 +45,16 @@ script = ExtResource("3_w55vt")
 grid_space = Rect2i(0, 0, 50, 50)
 
 [node name="Player" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("3_ib0dj")
 script = ExtResource("3_fnxes")
 speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2, 2)
 
 [node name="Enemy" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(144, 144)
 texture = ExtResource("5_vacma")
 script = ExtResource("4_b1hhf")
