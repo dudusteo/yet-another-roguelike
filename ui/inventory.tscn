@@ -1,12 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://jn4qsa0g5pjm"]
 
-[ext_resource type="Script" path="res://ui/hot_bar.gd" id="1_apqcr"]
+[ext_resource type="Script" path="res://ui/inventory.gd" id="1_qu1ur"]
 
 [node name="HotBar" type="PanelContainer"]
-script = ExtResource("1_apqcr")
+script = ExtResource("1_qu1ur")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2

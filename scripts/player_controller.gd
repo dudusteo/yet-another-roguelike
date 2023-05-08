@@ -1,6 +1,7 @@
 extends "res://scripts/entity_controller.gd"
 
 @export var inventory_data: InventoryData
+@export var equip_inventory_data: InventoryData
 
 @onready var tile_manager: Node2D = get_tree().get_root().get_node("Root/TileManager")
 

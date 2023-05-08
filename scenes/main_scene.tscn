@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://60wrbc85nvj7"]
+[gd_scene load_steps=39 format=3 uid="uid://60wrbc85nvj7"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_hll4a"]
 [ext_resource type="Texture2D" uid="uid://cij5y5v5ij4ri" path="res://sprites/tiles.png" id="2_dpvfv"]
@@ -11,7 +11,15 @@
 [ext_resource type="Script" path="res://inventory/item_data.gd" id="6_dk067"]
 [ext_resource type="PackedScene" uid="uid://dp8vsuibuisk7" path="res://ui/ui.tscn" id="7_fg2c4"]
 [ext_resource type="Texture2D" uid="uid://bah7iqwd7dheg" path="res://sprites/48-Expresso.png" id="7_s5h37"]
+[ext_resource type="Script" path="res://inventory/type.gd" id="8_81ylq"]
+[ext_resource type="Script" path="res://inventory/stat.gd" id="8_f4nv1"]
+[ext_resource type="Script" path="res://inventory/item_data_equip.gd" id="8_w6xf7"]
+[ext_resource type="Script" path="res://inventory/inventory_data_equip.gd" id="9_abxbf"]
 [ext_resource type="Script" path="res://scripts/time_manager.gd" id="10_075q7"]
+[ext_resource type="Texture2D" uid="uid://y8oi1pqi2siq" path="res://sprites/headgear.png" id="11_4lh4e"]
+[ext_resource type="Texture2D" uid="uid://drpl8gw4m4v8h" path="res://sprites/breastplate.png" id="12_wsakl"]
+[ext_resource type="Texture2D" uid="uid://brv30ogdjph4w" path="res://sprites/gloves.png" id="13_8ptwa"]
+[ext_resource type="Texture2D" uid="uid://c5rbp6573ihi2" path="res://sprites/boots.png" id="14_je2hd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rri67"]
 texture = ExtResource("2_dpvfv")
@@ -24,15 +32,92 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_rri67")
 
+[sub_resource type="Resource" id="Resource_66va4"]
+script = ExtResource("8_81ylq")
+name = "Consumable"
+
 [sub_resource type="Resource" id="Resource_wuwnh"]
 script = ExtResource("6_dk067")
 name = "Coffee"
+type = SubResource("Resource_66va4")
 description = "Coffee"
 texture = ExtResource("7_s5h37")
 
+[sub_resource type="Resource" id="Resource_230nq"]
+script = ExtResource("8_f4nv1")
+name = "Health"
+
+[sub_resource type="Resource" id="Resource_3lu48"]
+script = ExtResource("8_81ylq")
+name = "Head"
+
+[sub_resource type="Resource" id="Resource_stkgc"]
+script = ExtResource("8_w6xf7")
+main_stat = SubResource("Resource_230nq")
+sub_stat = Array[ExtResource("8_f4nv1")]([])
+name = "Iron Helmet"
+type = SubResource("Resource_3lu48")
+description = ""
+texture = ExtResource("11_4lh4e")
+
+[sub_resource type="Resource" id="Resource_p76qf"]
+script = ExtResource("8_f4nv1")
+name = "Defence"
+
+[sub_resource type="Resource" id="Resource_gbrry"]
+script = ExtResource("8_81ylq")
+name = "Chest"
+
+[sub_resource type="Resource" id="Resource_5r7yi"]
+script = ExtResource("8_w6xf7")
+main_stat = SubResource("Resource_p76qf")
+sub_stat = Array[ExtResource("8_f4nv1")]([])
+name = "Breastplate"
+type = SubResource("Resource_gbrry")
+description = ""
+texture = ExtResource("12_wsakl")
+
+[sub_resource type="Resource" id="Resource_iabdo"]
+script = ExtResource("8_f4nv1")
+name = "Crit Chance"
+
+[sub_resource type="Resource" id="Resource_vsepd"]
+script = ExtResource("8_81ylq")
+name = "Hand"
+
+[sub_resource type="Resource" id="Resource_wgsu6"]
+script = ExtResource("8_w6xf7")
+main_stat = SubResource("Resource_iabdo")
+sub_stat = Array[ExtResource("8_f4nv1")]([])
+name = "Gloves"
+type = SubResource("Resource_vsepd")
+description = ""
+texture = ExtResource("13_8ptwa")
+
+[sub_resource type="Resource" id="Resource_f6iwx"]
+script = ExtResource("8_f4nv1")
+name = "Speed"
+
+[sub_resource type="Resource" id="Resource_mx42h"]
+script = ExtResource("8_81ylq")
+name = "Foot"
+
+[sub_resource type="Resource" id="Resource_2ptj7"]
+script = ExtResource("8_w6xf7")
+main_stat = SubResource("Resource_f6iwx")
+sub_stat = Array[ExtResource("8_f4nv1")]([])
+name = "Boots"
+type = SubResource("Resource_mx42h")
+description = ""
+texture = ExtResource("14_je2hd")
+
 [sub_resource type="Resource" id="Resource_jla61"]
 script = ExtResource("6_8dlua")
-item_datas = [SubResource("Resource_wuwnh"), null, null, null, null, null]
+item_datas = Array[ExtResource("6_dk067")]([SubResource("Resource_wuwnh"), SubResource("Resource_stkgc"), SubResource("Resource_5r7yi"), SubResource("Resource_wgsu6"), SubResource("Resource_2ptj7"), null, null])
+
+[sub_resource type="Resource" id="Resource_58jkl"]
+script = ExtResource("9_abxbf")
+item_datas = Array[ExtResource("6_dk067")]([null, null, null, null])
 
 [node name="Root" type="Node"]
 script = ExtResource("1_hll4a")
@@ -71,6 +156,7 @@ texture_filter = 1
 texture = ExtResource("3_ib0dj")
 script = ExtResource("3_fnxes")
 inventory_data = SubResource("Resource_jla61")
+equip_inventory_data = SubResource("Resource_58jkl")
 speed = 7.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
