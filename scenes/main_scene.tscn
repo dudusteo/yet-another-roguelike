@@ -46,6 +46,8 @@ texture = ExtResource("7_s5h37")
 [sub_resource type="Resource" id="Resource_230nq"]
 script = ExtResource("8_f4nv1")
 name = "Health"
+value = 0
+rolls = 1
 
 [sub_resource type="Resource" id="Resource_3lu48"]
 script = ExtResource("8_81ylq")
@@ -63,6 +65,8 @@ texture = ExtResource("11_4lh4e")
 [sub_resource type="Resource" id="Resource_p76qf"]
 script = ExtResource("8_f4nv1")
 name = "Defence"
+value = 0
+rolls = 1
 
 [sub_resource type="Resource" id="Resource_gbrry"]
 script = ExtResource("8_81ylq")
@@ -80,6 +84,8 @@ texture = ExtResource("12_wsakl")
 [sub_resource type="Resource" id="Resource_iabdo"]
 script = ExtResource("8_f4nv1")
 name = "Crit Chance"
+value = 0
+rolls = 1
 
 [sub_resource type="Resource" id="Resource_vsepd"]
 script = ExtResource("8_81ylq")
@@ -97,6 +103,8 @@ texture = ExtResource("13_8ptwa")
 [sub_resource type="Resource" id="Resource_f6iwx"]
 script = ExtResource("8_f4nv1")
 name = "Speed"
+value = 0
+rolls = 1
 
 [sub_resource type="Resource" id="Resource_mx42h"]
 script = ExtResource("8_81ylq")
@@ -157,7 +165,7 @@ texture = ExtResource("3_ib0dj")
 script = ExtResource("3_fnxes")
 inventory_data = SubResource("Resource_jla61")
 equip_inventory_data = SubResource("Resource_58jkl")
-speed = 7.0
+speed = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
