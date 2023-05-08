@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://ui/inventory.gd" id="1_qu1ur"]
 
-[node name="HotBar" type="PanelContainer"]
+[node name="Inventory" type="PanelContainer"]
 script = ExtResource("1_qu1ur")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -12,5 +12,6 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
+columns = 6

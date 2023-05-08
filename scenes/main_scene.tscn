@@ -113,7 +113,7 @@ texture = ExtResource("14_je2hd")
 
 [sub_resource type="Resource" id="Resource_jla61"]
 script = ExtResource("6_8dlua")
-item_datas = Array[ExtResource("6_dk067")]([SubResource("Resource_wuwnh"), SubResource("Resource_stkgc"), SubResource("Resource_5r7yi"), SubResource("Resource_wgsu6"), SubResource("Resource_2ptj7"), null, null])
+item_datas = Array[ExtResource("6_dk067")]([SubResource("Resource_wuwnh"), SubResource("Resource_stkgc"), SubResource("Resource_5r7yi"), SubResource("Resource_wgsu6"), SubResource("Resource_2ptj7"), null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="Resource" id="Resource_58jkl"]
 script = ExtResource("9_abxbf")

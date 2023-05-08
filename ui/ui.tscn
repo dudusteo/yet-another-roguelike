@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp8vsuibuisk7"]
+[gd_scene load_steps=5 format=3 uid="uid://dp8vsuibuisk7"]
 
 [ext_resource type="Script" path="res://ui/ui_manager.gd" id="1_7x8an"]
 [ext_resource type="PackedScene" uid="uid://cb1qj047m3p3q" path="res://ui/speed_bar.tscn" id="1_p2nbl"]
 [ext_resource type="PackedScene" uid="uid://jn4qsa0g5pjm" path="res://ui/inventory.tscn" id="2_tgw0f"]
+[ext_resource type="PackedScene" uid="uid://dau01ducx6o11" path="res://ui/equip_inventory.tscn" id="4_hepmc"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_7x8an")
@@ -24,10 +25,10 @@ size_flags_horizontal = 0
 
 [node name="Inventory" parent="MarginContainer" instance=ExtResource("2_tgw0f")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
-[node name="EquipInventory" parent="MarginContainer" instance=ExtResource("2_tgw0f")]
+[node name="EquipInventory" parent="MarginContainer" instance=ExtResource("4_hepmc")]
 layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_vertical = 4
